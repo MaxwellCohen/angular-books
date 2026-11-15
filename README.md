@@ -23,3 +23,16 @@ pnpm build
 pnpm start      # production SSR server (PORT, default 4000)
 pnpm typecheck
 ```
+
+## Deployment
+
+| Host | URL | Build flag |
+| --- | --- | --- |
+| Vercel | https://angular-books-sigma.vercel.app | `VERCEL=1` (set by Vercel) |
+| Netlify | https://max-angular-books.netlify.app | `NETLIFY=1` |
+| Cloudflare Workers | https://angular-books.to-email-max.workers.dev | `CLOUDFLARE=1` (or `WORKERS_CI`, set by Workers Builds) |
+
+- Vercel and Netlify are connected to this repo: a push to `main` builds and deploys to both. Cloudflare is deployed with `pnpm deploy:cloudflare`.
+- The build picks the host adapter from the flag above; with no flag it targets Node (Express).
+- `POSTGRES_URL` is set on every host (Vercel and Netlify environment variable, Cloudflare secret). Without it the app serves the preview catalog.
+- Manual deploys: `pnpm deploy:vercel`, `pnpm deploy:netlify`, `pnpm deploy:cloudflare`.
