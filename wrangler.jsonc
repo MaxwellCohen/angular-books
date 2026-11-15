@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "angular-books",
+  "main": "dist/angular-books/server/server.mjs",
+  "compatibility_date": "2026-09-16",
+  "alias": { "xhr2": "./workers/xhr2-stub.mjs" },
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/angular-books/browser",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

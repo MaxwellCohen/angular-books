@@ -1,0 +1,7 @@
+[build]
+  command = "NETLIFY=1 pnpm build"
+  publish = "dist/angular-books/browser"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NETLIFY = "1"

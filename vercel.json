@@ -1,0 +1,11 @@
+{
+  "buildCommand": "pnpm build",
+  "framework": null,
+  "outputDirectory": "dist/angular-books/browser",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/angular-books/server/**"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+}

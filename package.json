@@ -1,0 +1,50 @@
+{
+  "name": "angular-books",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "build": "node scripts/build.mjs",
+    "watch": "ng build --watch --configuration development",
+    "dev": "ng serve",
+    "start": "node dist/angular-books/server/server.mjs",
+    "typecheck": "ngc --noEmit -p tsconfig.app.json",
+    "deploy:vercel": "vercel deploy --prod --yes",
+    "deploy:netlify": "npx --yes netlify-cli deploy --build --prod",
+    "deploy:cloudflare": "CLOUDFLARE=1 pnpm build && wrangler deploy",
+    "preview:cloudflare": "CLOUDFLARE=1 pnpm build && wrangler dev"
+  },
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/platform-server": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "@angular/ssr": "^22.2.7",
+    "@neondatabase/serverless": "^1.2.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.4",
+    "express": "^5.1.0",
+    "rxjs": "~7.8.0",
+    "tailwind-merge": "^3.7.0",
+    "thumbhash": "^0.1.1",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.7",
+    "@angular/cli": "^22.2.7",
+    "@angular/compiler-cli": "^22.2.0",
+    "@netlify/angular-runtime": "^4.0.0",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.12.0",
+    "postcss": "^8.5.33",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.3.5",
+    "typescript": "~6.0.2",
+    "wrangler": "^4.162.0"
+  }
+}
