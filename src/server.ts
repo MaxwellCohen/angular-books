@@ -8,6 +8,7 @@ import express from 'express';
 import { join } from 'node:path';
 import { getBookById, getBooksCount, getBooksPage } from '@/features/book/book-queries.server';
 import { toBookFilters, toBookQuery } from '@/features/book/book-utils';
+import { htmlResponseWithCacheHeaders } from '@/lib/catalog-cache';
 import { waitForApiDelay } from '@/lib/api-delay';
 import { getApiDelayMs, parseSearchParams } from '@/lib/url-state';
 import type { RawSearchParams } from '@/lib/url-state';
@@ -83,7 +84,9 @@ app.use((req, res, next) => {
   angularApp
     .handle(req)
     .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
+      response
+        ? writeResponseToNodeResponse(htmlResponseWithCacheHeaders(response), res)
+        : next(),
     )
     .catch(next);
 });

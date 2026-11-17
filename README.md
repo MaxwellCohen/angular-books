@@ -36,3 +36,16 @@ pnpm typecheck
 - The build picks the host adapter from the flag above; with no flag it targets Node (Express).
 - `POSTGRES_URL` is set on every host (Vercel and Netlify environment variable, Cloudflare secret). Without it the app serves the preview catalog.
 - Manual deploys: `pnpm deploy:vercel`, `pnpm deploy:netlify`, `pnpm deploy:cloudflare`.
+
+### Optimized branch
+
+The `optimized` branch is deployed separately (production branch `optimized`):
+
+| Host | URL |
+| --- | --- |
+| Vercel | https://angular-books-optimized.vercel.app |
+| Netlify | https://angular-books-max-optimized.netlify.app |
+| Cloudflare Workers | https://angular-books-optimized.to-email-max.workers.dev |
+
+- Fonts: Geist and Geist Mono are self-hosted via `@fontsource-variable/*` and bundled with the app instead of loaded from Google Fonts.
+- Caching: catalog queries are cached for 1 hour (in-memory with in-flight de-dup, plus Vercel runtime cache, Netlify Blobs or Cloudflare KV), and hashed JS/CSS/font assets are served with `Cache-Control: public, max-age=31536000, immutable`.

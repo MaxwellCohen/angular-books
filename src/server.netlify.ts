@@ -1,5 +1,6 @@
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 import { getAllowedHosts, getContext, getTrustProxyHeaders } from '@netlify/angular-runtime/app-engine.js';
+import { htmlResponseWithCacheHeaders } from '@/lib/catalog-cache';
 import { handleApi } from './server/api.server';
 
 const angularAppEngine = new AngularAppEngine({
@@ -14,7 +15,7 @@ export async function netlifyAppEngineHandler(request: Request): Promise<Respons
   if (apiResponse) return apiResponse;
 
   const result = await angularAppEngine.handle(request, context);
-  return result || new Response('Not found', { status: 404 });
+  return htmlResponseWithCacheHeaders(result || new Response('Not found', { status: 404 }));
 }
 
 /**

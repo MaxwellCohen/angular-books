@@ -96,6 +96,7 @@
               }
             },
             "cloudflare": {
+              "externalDependencies": ["@netlify/blobs", "@vercel/functions"],
               "ssr": {
                 "entry": "src/server.cloudflare.ts",
                 "platform": "neutral"
