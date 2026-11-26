@@ -1,0 +1,15 @@
+{
+  "framework": "angular",
+  "repo": "angular-books",
+  "commit": "5e602ad5ceefe3143677672f75be74c5b7d70f4a",
+  "ranAt": "2026-11-26T04:42:25.436Z",
+  "results": {
+    "image-pipeline": {
+      "claimedLabel": "first-party",
+      "status": "pass",
+      "method": "NgOptimizedImage (ngSrc, sizes, priority) with the built-in provideCloudinaryLoader (Cloudinary public demo cloud does the resizing/format)",
+      "evidence": "srcset=\"https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_16,h_11/sample.jpg 16w, https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_32,h_21/sample…\" (16 widths), width/height=800x533, offscreen loading=lazy (loaded before scroll=false), SSR preload link=true, https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_640,h_426/sample.jpg -> 200 image/avif; resizing/format done by Cloudinary, not Angular",
+      "test": "feature-tests/image-pipeline.spec.ts"
+    }
+  }
+}

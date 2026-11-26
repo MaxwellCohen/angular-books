@@ -12,12 +12,18 @@ try {
 
 const json = (body: unknown, status = 200) => Response.json(body, { status });
 
+let ftCounter = 0;
+
 /**
  * Framework-neutral implementation of the /api routes. Returns null when the
  * request is not an API request so the caller can fall through to Angular.
  */
 export async function handleApi(request: Request): Promise<Response | null> {
   const url = new URL(request.url);
+  // Feature-test probe: a fresh timestamp + counter on every call (no caching here).
+  if (request.method === 'GET' && url.pathname === '/api/ft/now') {
+    return Response.json({ now: Date.now(), counter: ++ftCounter }, { headers: { 'Cache-Control': 'no-store' } });
+  }
   if (request.method !== 'GET' || !url.pathname.startsWith('/api/books')) return null;
 
   const raw: RawSearchParams = {};

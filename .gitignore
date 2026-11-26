@@ -52,3 +52,9 @@ Thumbs.db
 .netlify
 .wrangler
 .dev.vars
+
+# Feature tests
+/dist-ft
+/feature-tests/test-results
+/test-results
+/playwright-report
