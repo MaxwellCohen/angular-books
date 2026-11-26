@@ -22,7 +22,7 @@ Pages live under `/feature-tests` (`src/app/feature-tests/`); server render mode
 | font-optimization | `optimization.fonts.inline` inlines Google Fonts CSS with `font-display`; asserts self-hosting (no gstatic requests) and `<link rel=preload as=font>` — both missing, so it fails. |
 | image-pipeline | `NgOptimizedImage` + built-in Cloudinary loader: srcset ≥2 widths, width/height, offscreen `loading=lazy` not fetched, SSR preload for `priority`, srcset URL returns AVIF/WebP. |
 | caching | Prerendered stamp identical across requests; HttpClient transfer cache (`ng-state`) means no API refetch on hydration; per-route `headers` give `s-maxage` on a Server route. |
-| route-prefetching | `withPreloading(PreloadAllModules)` downloads the target route chunk before any click; `@defer (prefetch on hover)` downloads its chunk on hover, before click. |
+| route-prefetching | `withPreloading(FlaggedPreloading)` (preloads only routes with `data.preload`; scoped to feature-tests) downloads the target route chunk before any click; `@defer (prefetch on hover)` downloads its chunk on hover, before click. |
 | islands | `@defer (hydrate never)` static card: its marker string is in no downloaded JS; `@defer (hydrate on interaction)` counter hydrates and counts on click. |
 | render-modes | Prerender (file in build output, stable stamp), Server (stamp changes per request), Client (CSR shell, renders in browser). |
 | reactivity | Signal set from outside Angular: constructors run once, parent template not re-run; asserts the signal-reading component's template doesn't re-run either (it does: view-level granularity). |

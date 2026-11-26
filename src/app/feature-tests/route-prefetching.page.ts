@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { HoverPrefetchTarget } from './hover-prefetch-target';
 
 /**
- * Router: withPreloading(PreloadAllModules) (app.config.ts) preloads lazy route chunks
+ * Router: withPreloading(FlaggedPreloading) (app.config.ts) preloads lazy route chunks
  * after navigation, before any click. @defer: `prefetch on hover` fetches the block's
  * chunk when the trigger is hovered.
  */

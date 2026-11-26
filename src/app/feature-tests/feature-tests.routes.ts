@@ -24,6 +24,7 @@ export const featureTestRoutes: Routes = [
   { path: 'route-prefetching', loadComponent: () => import('./route-prefetching.page').then((m) => m.RoutePrefetchingPage) },
   {
     path: 'route-prefetching/target',
+    data: { preload: true },
     loadComponent: () => import('./route-prefetching-target.page').then((m) => m.RoutePrefetchingTargetPage),
   },
   { path: 'islands', loadComponent: () => import('./islands.page').then((m) => m.IslandsPage) },

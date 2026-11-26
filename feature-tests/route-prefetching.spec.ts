@@ -19,7 +19,7 @@ test('lazy route chunk and @defer chunk are fetched before the click', async ({ 
   await page.goto('/feature-tests/route-prefetching');
   await page.waitForLoadState('networkidle');
 
-  // PreloadAllModules: the target route's chunk is already downloaded, no click yet.
+  // withPreloading: the target route's chunk is already downloaded, no click yet.
   await expect.poll(() => markerChunks.has('FT_ROUTE_TARGET_MARKER_9d41')).toBe(true);
   const routeChunkBeforeClick = markerChunks.get('FT_ROUTE_TARGET_MARKER_9d41')!;
   const deferBeforeHover = markerChunks.has('FT_DEFER_HOVER_MARKER_51c2');
@@ -42,7 +42,7 @@ test('lazy route chunk and @defer chunk are fetched before the click', async ({ 
   expect(deferBeforeHover).toBe(false);
   expect(jsAfterClick.filter((u) => routeChunkBeforeClick.includes(u))).toEqual([]);
   evidence(
-    `PreloadAllModules fetched target route chunk ${routeChunkBeforeClick.map((u) => u.split('/').pop())} on page load before any click/hover (eager, not hover/viewport-driven); ` +
+    `withPreloading(FlaggedPreloading) fetched target route chunk ${routeChunkBeforeClick.map((u) => u.split('/').pop())} on page load before any click/hover (eager, not hover/viewport-driven); ` +
       `@defer prefetch on hover fetched its chunk on hover (not before); link click fetched ${jsAfterClick.length} JS files`,
   );
 });

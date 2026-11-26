@@ -39,6 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'feature-tests',
+    data: { preload: true },
     loadChildren: () => import('./feature-tests/feature-tests.routes').then((m) => m.featureTestRoutes),
   },
   {

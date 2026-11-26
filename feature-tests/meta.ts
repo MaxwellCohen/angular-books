@@ -19,7 +19,7 @@ export const FEATURES: Record<string, { claimedLabel: string; method: string; su
   },
   'route-prefetching': {
     claimedLabel: 'first-party',
-    method: 'provideRouter(..., withPreloading(PreloadAllModules)) for lazy routes + @defer (on interaction; prefetch on hover)',
+    method: 'provideRouter(..., withPreloading(FlaggedPreloading)) (a PreloadingStrategy that preloads routes with data.preload) for lazy routes + @defer (on interaction; prefetch on hover)',
   },
   islands: {
     claimedLabel: 'first-party',
