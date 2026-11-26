@@ -1,8 +1,8 @@
 {
   "framework": "angular",
   "repo": "angular-books",
-  "commit": "21912d0adc576df6103546b5636f7eead6dd2808",
-  "ranAt": "2026-11-26T04:51:21.751Z",
+  "commit": "2f250dc83ecd68f329dbfd752800f0e69ab06945",
+  "ranAt": "2026-11-26T05:20:15.548Z",
   "results": {
     "css-inlining": {
       "claimedLabel": "first-party",
@@ -30,49 +30,49 @@
       "claimedLabel": "first-party",
       "status": "pass",
       "method": "RenderMode.Prerender + default HttpClient transfer cache (provideClientHydration) + per-route ServerRoute headers (Cache-Control s-maxage)",
-      "evidence": "prerendered stamp 1795668308348 == 1795668308348 across requests (live API counter 1->2); hydration made 0 /api/ft/now requests (ng-state transfer cache), shown=1795668308348; server route Cache-Control=\"public, max-age=0, s-maxage=60, stale-while-revalidate=300\" but its stamp changes per request locally (1795668418406 vs 1795668418741): no server/data cache or ISR, reuse only via a CDN honoring s-maxage",
+      "evidence": "prerendered stamp 1795670381998 == 1795670381998 across requests (live API counter 1->2); hydration made 0 /api/ft/now requests (ng-state transfer cache), shown=1795670381998; server route Cache-Control=\"public, max-age=0, s-maxage=60, stale-while-revalidate=300\" but its stamp changes per request locally (1795670391595 vs 1795670391622): no server/data cache or ISR, reuse only via a CDN honoring s-maxage",
       "test": "feature-tests/caching.spec.ts"
     },
     "route-prefetching": {
       "claimedLabel": "first-party",
       "status": "pass",
-      "method": "provideRouter(..., withPreloading(PreloadAllModules)) for lazy routes + @defer (on interaction; prefetch on hover)",
-      "evidence": "PreloadAllModules fetched target route chunk chunk-DpSJSo2s.js on page load before any click/hover (eager, not hover/viewport-driven); @defer prefetch on hover fetched its chunk on hover (not before); link click fetched 0 JS files",
+      "method": "provideRouter(..., withPreloading(FlaggedPreloading)) (a PreloadingStrategy that preloads routes with data.preload) for lazy routes + @defer (on interaction; prefetch on hover)",
+      "evidence": "withPreloading(FlaggedPreloading) fetched target route chunk chunk-DpSJSo2s.js on page load before any click/hover (eager, not hover/viewport-driven); @defer prefetch on hover fetched its chunk on hover (not before); link click fetched 0 JS files",
       "test": "feature-tests/route-prefetching.spec.ts"
     },
     "islands": {
       "claimedLabel": "first-party",
       "status": "pass",
       "method": "Incremental hydration: @defer (hydrate never) static card + @defer (hydrate on interaction) counter island, default-on with provideClientHydration()",
-      "evidence": "24 JS files downloaded, none contain the static marker (leaked: 0); island chunk chunk-BYF_c7qp.js loaded on interaction (before interaction: false); counter 0 -> 2 after clicks",
+      "evidence": "9 JS files downloaded, none contain the static marker (leaked: 0); island chunk chunk-BYF_c7qp.js loaded on interaction (before interaction: false); counter 0 -> 2 after clicks",
       "test": "feature-tests/islands.spec.ts"
     },
     "render-modes": {
       "claimedLabel": "first-party",
       "status": "pass",
       "method": "ServerRoute[] in app.routes.server.ts with RenderMode.Prerender / RenderMode.Server / RenderMode.Client on different routes",
-      "evidence": "prerendered: build file exists, stamp stable 2026-11-26T04:45:07.736Z == 2026-11-26T04:45:07.736Z; server: stamp changes 2026-11-26T04:51:02.774Z -> 2026-11-26T04:51:03.214Z; client: response is the CSR shell (no stamp), rendered in browser",
+      "evidence": "prerendered: build file exists, stamp stable 2026-11-26T05:19:41.996Z == 2026-11-26T05:19:41.996Z; server: stamp changes 2026-11-26T05:20:13.634Z -> 2026-11-26T05:20:13.714Z; client: response is the CSR shell (no stamp), rendered in browser",
       "test": "feature-tests/render-modes.spec.ts"
     },
     "reactivity": {
       "claimedLabel": "first-party",
       "status": "fail",
       "method": "signal() read in an OnPush child template (zoneless default); render counters on parent and child templates + constructors",
-      "evidence": "count 0->3; constructors parent 1->1, child 1->1; 3 signal.set() calls from outside Angular: parent template runs 0->1, child (signal-reading) template runs 0->4; 1 (click) handler: parent 1->2, child 4->5. Granularity is the component view (its whole template update pass re-runs), not the text node; assertion: Error: expect(received).toBe(expected) // Object.is equality Expected: 0 Received: 1",
+      "evidence": "count 0->3; constructors parent 1->1, child 1->1; 3 signal.set() calls from outside Angular: parent template runs 1->1, child (signal-reading) template runs 1->4; 1 (click) handler: parent 1->2, child 4->5. Granularity is the component view (its whole template update pass re-runs), not the text node; assertion: Error: signal-reading component template re-ran expect(received).toBe(expected) // Object.is equality Expected: 1 Received: 4",
       "test": "feature-tests/reactivity.spec.ts"
     },
     "bundle-analysis": {
       "claimedLabel": "third-party",
       "status": "pass",
       "method": "ng build --stats-json (first-party esbuild metafile) + esbuild-visualizer (third-party) to render report.html",
-      "evidence": "browser-stats.json (319 inputs, 38 outputs) from first-party --stats-json; report.html 210 KB from third-party esbuild-visualizer (no first-party viewer)",
+      "evidence": "browser-stats.json (320 inputs, 38 outputs) from first-party --stats-json; report.html 210 KB from third-party esbuild-visualizer (no first-party viewer)",
       "test": "feature-tests/bundle-analysis.spec.ts"
     },
     "third-party-scripts": {
       "claimedLabel": "manual",
       "status": "pass",
       "method": "Hand-rolled: afterNextRender + requestIdleCallback injects an async <script src=/ft/third-party.js>",
-      "evidence": "not in SSR HTML; injected into <body> async=true; request started at 4113ms vs FCP 1756ms / DCL 2037ms; window.__ftThirdParty set",
+      "evidence": "not in SSR HTML; injected into <body> async=true; request started at 160ms vs FCP 76ms / DCL 114ms; window.__ftThirdParty set",
       "test": "feature-tests/third-party-scripts.spec.ts"
     },
     "multi-host-deployment": {
