@@ -76,6 +76,8 @@ function envFlag(name: string) {
 /** Cloudflare Workers freeze Response headers; copy them onto a new Response. */
 export function htmlResponseWithCacheHeaders(response: Response): Response {
 	if (!response.headers.get('content-type')?.includes('text/html')) return response;
+	// Per-route `headers` from app.routes.server.ts win over the host default.
+	if (response.headers.has('x-route-cache-control')) return response;
 	const headers = new Headers(response.headers);
 	headers.set('Cache-Control', hostDocumentCacheControl());
 	headers.delete('CDN-Cache-Control');

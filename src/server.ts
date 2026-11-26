@@ -13,6 +13,7 @@ import { waitForApiDelay } from '@/lib/api-delay';
 import { getApiDelayMs, parseSearchParams } from '@/lib/url-state';
 import type { RawSearchParams } from '@/lib/url-state';
 import type { Request, Response } from 'express';
+import { handleApi } from './server/api.server';
 
 try {
   process.loadEnvFile('.env');
@@ -63,6 +64,14 @@ app.get(
       return;
     }
     res.json(book);
+  }),
+);
+
+app.get(
+  '/api/ft/now',
+  handler(async (req, res) => {
+    const response = await handleApi(new globalThis.Request(new URL(req.originalUrl, 'http://localhost')));
+    res.set('Cache-Control', 'no-store').json(await response!.json());
   }),
 );
 

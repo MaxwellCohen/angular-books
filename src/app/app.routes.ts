@@ -38,6 +38,11 @@ export const routes: Routes = [
     resolve: { data: catalogResolver },
   },
   {
+    path: 'feature-tests',
+    data: { preload: true },
+    loadChildren: () => import('./feature-tests/feature-tests.routes').then((m) => m.featureTestRoutes),
+  },
+  {
     path: ':id',
     loadComponent: () => import('./pages/book.page').then((m) => m.BookPage),
     resolve: { data: bookResolver },
