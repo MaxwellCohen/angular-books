@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { thumbHashToDataURL } from 'thumbhash';
 import { EMPTY_IMAGE_URL, getLargeBookImageUrl } from '@/features/book/book-constants';
@@ -16,6 +17,7 @@ function thumbhashUrl(hash: string | null): string | undefined {
 
 @Component({
   selector: 'app-book-cover',
+  imports: [NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'bg-card dark:bg-card-dark relative block aspect-[2/3] w-full overflow-hidden rounded-md bg-cover bg-center',
@@ -26,11 +28,11 @@ function thumbhashUrl(hash: string | null): string | undefined {
       <img
         class="absolute inset-0 h-full w-full object-cover"
         decoding="async"
+        fill
         [alt]="title()"
-        [attr.fetchpriority]="priority() ? 'high' : null"
-        [attr.loading]="priority() ? 'eager' : 'lazy'"
-        [attr.sizes]="sizes()"
-        [src]="readySrc()"
+        [priority]="priority()"
+        [sizes]="sizes()"
+        [ngSrc]="readySrc()"
         (error)="failedSrc.set(readySrc())"
       />
     } @else {

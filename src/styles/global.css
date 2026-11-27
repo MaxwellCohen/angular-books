@@ -25,10 +25,6 @@
   --color-danger: #e54848;
   --color-warning: #f5a524;
 
-  --font-geist-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, monospace;
-  --font-geist-sans: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
 
   --tracking-tight: -0.02em;
   --tracking-wide: 0.04em;
@@ -39,6 +35,16 @@
   --radius-lg: 12px;
 
   --shadow-soft: 0 2px 8px -2px rgb(24 24 27 / 0.12), 0 4px 16px -4px rgb(24 24 27 / 0.1);
+}
+
+/* `inline` writes the family names straight into the `font-sans` / `font-mono`
+   utilities instead of `var(--font-sans)`. Angular's critical-CSS inliner (Beasties)
+   only sees literal family names, so this is what lets it inline the matching
+   @font-face rules and emit `<link rel="preload" as="font">` for the subsets the
+   page uses. Behind a var() it found no fonts and preloaded nothing. */
+@theme inline {
+  --font-sans: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, monospace;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
