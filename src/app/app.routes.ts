@@ -44,6 +44,7 @@ export const routes: Routes = [
   },
   {
     path: ':id',
+    data: { preload: true },
     loadComponent: () => import('./pages/book.page').then((m) => m.BookPage),
     resolve: { data: bookResolver },
   },
